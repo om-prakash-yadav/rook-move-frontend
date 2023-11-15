@@ -2,7 +2,6 @@ import "phaser";
 import store from "../Services/store";
 import { updateGameState } from "../Services/gameSlice";
 import {  toast } from 'react-toastify';
-import { on } from "events";
 
 export class Game extends Phaser.Scene {
   // @ts-ignore
@@ -123,11 +122,13 @@ export class Game extends Phaser.Scene {
           this.highlightValidPaths();
           // If rook hits the vortex then winner is declared whichever user did it
           if (rowNo === 7 && colNo === 0) {
+            if (currState.playerTurn) {
            toast.warn("You Lose !, The other player made the rook reach vortex before you");
                setInterval(() => {
              window.location.href = "/";
                 }
                 , 3000);
+              }
             return;
           }
         },

@@ -22,7 +22,6 @@
 }
 
 
-
 .home #create-game {
     margin: 1.25rem;
     color: #fff;
@@ -34,11 +33,26 @@
     border: 1px solid rgba(255, 255, 255, 0.1); /* Adjust the border transparency */
 }
 
-.home .modal {
+.home .modal .form {
     background: #000 !important;
 }
 
+
+#modalCard
+{
+   
+    color: #fff;
+    background: rgb(3, 7, 48);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Adjust the border transparency */
+}
+
+
 @media (max-width: 600px) {
+
     .home {
         align-items: start;
     }

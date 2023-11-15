@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Form, Modal, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/css/home.css";
 import { SERVER_URL } from "../constants";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { SpinnerInfinity } from "spinners-react";
 
 const Home = () => {
@@ -17,11 +17,11 @@ const Home = () => {
     e.preventDefault();
 
     if (gameCode === "") {
-      toast.error( "Game code cannot be empty");
+      toast.error("Game code cannot be empty");
       return;
     }
     if (name === "") {
-      toast.error( "Name cannot be empty");
+      toast.error("Name cannot be empty");
       return;
     }
     if (name.length >= 50) {
@@ -43,87 +43,99 @@ const Home = () => {
           toast.error(`${data?.error}`);
           return;
         }
-        toast.error(`${data?.message}`+ "Click Ok to join the game")
-            window.location.href = `/game?gameId=${gameCode}&player2Name=${name}`;
-        
+        toast.error(`${data?.message}` + "Click Ok to join the game")
+        window.location.href = `/game?gameId=${gameCode}&player2Name=${name}`;
+
       })
       .catch((error: any) => {
         setIsBtnLoading(false);
-        toast.error( `${error?.error}`);
+        toast.error(`${error?.error}`);
         console.error({ error });
       });
   };
   return (
     <>
-      <ToastContainer 
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
       />
-      <Modal centered   show={show} onHide={() => setShow(false)}>
-       
-        <Form onSubmit={(e) => checkGameAndJoin(e)}>
-          <Modal.Body >
-            <Form.Label className="fw-medium ">Game Code</Form.Label>
-            <Form.Control
-              type="text"
-              autoFocus
-              placeholder="Enter Game Code"
-              onChange={(e) => setGameCode(e.target.value)}
-              required
-            />
-            <Form.Label className="fw-medium mt-3">Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Name"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShow(false)}>
-              Close
-            </Button>
-            <Button variant="success" type="submit" disabled={isBtnLoading}>
-              {isBtnLoading ? <SpinnerInfinity/> : "Join Game"}
-            </Button>
-          </Modal.Footer>
-        </Form>
+
+      <Modal centered show={show} onHide={() => setShow(false)}>
+        <Card id="modalCard" >
+          <Form onSubmit={(e) => checkGameAndJoin(e)}>
+            <Modal.Body >
+              <Form.Label className="fw-medium ">Game Code</Form.Label>
+              <Form.Control
+                type="text"
+                autoFocus
+                placeholder="Enter Game Code"
+                onChange={(e) => setGameCode(e.target.value)}
+                required
+              />
+              <Form.Label className="fw-medium mt-3">Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShow(false)}>
+                Close
+              </Button>
+              <Button variant="success" type="submit" disabled={isBtnLoading}>
+                {isBtnLoading ? <SpinnerInfinity /> : "Join Game"}
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Card>
+
       </Modal>
 
       <div className="home">
         <div className="row content-area">
-          <div className="col-12 col-lg-4">
+          <div className="col-12 d-flex flex-column align-items-center justify-content-center mt-5">
 
-            <div className="d-flex align-items-center justify-content-center flex-column flex-sm-row mt-5">
+            {/* Responsive Image */}
+            <img
+              src="assets/banner.svg" // Replace with the path to your image
+              alt="Game Image"
+              className=" mb-4"
+              style={{ maxWidth: "100%", height: '40vh' }}
+            />
+
+            {/* Responsive Buttons */}
+            <div className="d-flex flex-column flex-sm-row">
               <Button
-                className="me-0 mb-2 mb-sm-0 w-100 w-sm-unset me-sm-3"
+
+              className="mb-2 me-sm-4 mb-sm-0"
                 onClick={() => setShow(true)}
-                variant="info"
+                variant="success"
               >
                 Join a game
               </Button>
               <Button
-                className=" w-100 w-sm-unset"
+             
                 onClick={() => navigate("/game")}
-                variant="info"
+                variant="success"
               >
                 Create new game
               </Button>
-
             </div>
 
           </div>
-
         </div>
       </div>
+
 
     </>
   );
