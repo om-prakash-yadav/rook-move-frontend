@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:  #000;
+    min-height: 100vh;
+ 
+}
+
+.game .card {
+    width: 480px;
+    min-height: 200px;
+}
+
+#game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* height: 100vh; */
+}
+
+.playerSection {
+    position: relative;
+}
+
+.playerSection .profileIcon {
+    height: 72px;
+    width: 72px;
+    position: relative;
+    z-index: 10;
+    margin: 1rem auto;
+    display: block;
+    overflow: hidden;
+    object-fit: contain;
+}
+
+.playerSection .text {
+    font-size: 0.8rem;
+    color: white;
+    text-align: center;
+}
+
+.playerSection .top {
+    bottom: 70px;
+}
+
+.playerSection .bottom {
+    top: 96px;
+}
+
+#chessboard {
+    height: 480px;
+    width: 480px;
+}
+
+.game #waiting,
+.game #create-game {
+    margin: 1.25rem;
+    color: #fff;
+    background: rgb(3, 7, 48);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Adjust the border transparency */
+}
+
+.player-top .turn,
+.player-bottom .turn {
+    position: absolute;
+    font-weight: bold;
+    color: slategray;
+}
+
+@media (max-width: 600px) {
+    #canvas {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 400px) {
+    .game {
+        overflow: hidden;
+    }
+
+    #canvas {
+        transform: scale(0.75);
+        margin-top: -40px;
+    }
+
+    .player-top {
+        top: -20px;
+    }
+
+    .player-bottom {
+        top: -50px;
+    }
+
+    .player-top .turn {
+        position: relative !important;
+        bottom: 0 !important;
+        display: block;
+        text-align: center;
+        color: slategray;
+        background-color: #000;
+    }
+
+    .player-bottom .turn {
+        position: relative !important;
+        bottom: 0 !important;
+        display: block;
+        text-align: center;
+        color: slategray;
+        background-color: #000;
+    }
+}
