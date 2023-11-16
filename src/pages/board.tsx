@@ -475,7 +475,7 @@ const GameBoard = () => {
                     : gameState.player2.playerName
                 }`}{" "}
               </div>
-              <div className="turn start-0 bottom-0">
+              <div className="turn">
                 {gameState.playerTurn ? "" : "Opponents Turn"}
               </div>
             </div>
@@ -527,7 +527,7 @@ const GameBoard = () => {
                     : gameState.player1.playerName
                 } (You)`}{" "}
               </div>
-              <div className="turn end-0 bottom-0">
+              <div className="turn  ">
                 {gameState.playerTurn ? "Your Turn" : ""}
               </div>
            </div>

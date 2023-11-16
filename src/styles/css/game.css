@@ -75,28 +75,29 @@
 .player-top .turn,
 .player-bottom .turn {
     position: absolute;
+    bottom: 50px;
+    display: block;
+    text-align: center;
     font-weight: bold;
     color: slategray;
 }
 
-@media (max-width: 600px) {
-    #canvas {
-        transform: scale(0.8);
-    }
+.player-top .turn {
+    left: 0;
 }
 
-@media (max-width: 400px) {
-    .game {
-        overflow: hidden;
-    }
+.player-bottom .turn {
+    right: 0;
+}
 
+@media (max-width: 600px) {
     #canvas {
         transform: scale(0.75);
-        margin-top: -40px;
     }
-
     .player-top {
         top: -20px;
+      
+      
     }
 
     .player-bottom {
@@ -110,6 +111,7 @@
         text-align: center;
         color: slategray;
         background-color: #000;
+        
     }
 
     .player-bottom .turn {
@@ -120,4 +122,17 @@
         color: slategray;
         background-color: #000;
     }
+}
+
+@media (max-width: 400px) {
+    .game {
+        overflow: hidden;
+    }
+
+    #canvas {
+        transform: scale(0.6);
+        margin-top: -40px;
+    }
+
+   
 }
