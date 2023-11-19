@@ -16,9 +16,6 @@ export class Game extends Phaser.Scene {
   private squares: Array<Array<Phaser.GameObjects.Graphics>> = [];
   private highlightedPaths: Array<Phaser.GameObjects.Image> = [];
 
-  constructor() {
-    super();
-  }
 
   preload() {
     this.load.image("vortex", "./assets/images/vortex.png");

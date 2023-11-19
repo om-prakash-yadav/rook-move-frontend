@@ -9,8 +9,8 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { DECISION_TIMEOUT, SERVER_URL } from "../constants";
 import GameComponent from "../game";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-  import {  SpinnerDotted } from 'spinners-react';
+import 'react-toastify/dist/ReactToastify.css';
+import { SpinnerDotted } from 'spinners-react';
 import CopyToClipboard from "react-copy-to-clipboard";
 
 // Connect to socketio server
@@ -54,10 +54,10 @@ const GameBoard = () => {
         JSON.stringify({ gameId: gameId, socketId: socket.id })
       );
       toast.info("You Lose You did not move on time !")
-        redirectToHomePage();
-     
+      redirectToHomePage();
+
     }
-    return () => {};
+    return () => { };
   }, [timerSelf]);
 
   // Timout useEffect
@@ -136,15 +136,15 @@ const GameBoard = () => {
       console.log("Disconnected from server");
       if (gameState.isGameStarted) {
         toast.error("Game Over, Disconnected from server");
-          redirectToHomePage();
-        
+        redirectToHomePage();
+
       } else {
         toast.error(
-          
+
           "Disconnected from server",
-        
+
         );
-         redirectToHomePage();
+        redirectToHomePage();
       }
     });
 
@@ -213,11 +213,10 @@ const GameBoard = () => {
       console.log("game-ended");
       console.log(data);
       toast.error(
-       
-        `Game Ended, Winner : ${data?.gameState?.winner ?? ""}\nResults : ${
-          data?.gameState?.reason ?? ""
+
+        `Game Ended, Winner : ${data?.gameState?.winner ?? ""}\nResults : ${data?.gameState?.reason ?? ""
         }`,
-       
+
       );
       redirectToHomePage();
     });
@@ -226,7 +225,7 @@ const GameBoard = () => {
       console.log("game-not-found");
       toast.error("Game not found, Please check the game id");
       redirectToHomePage();
-      
+
     });
 
     socket.on("already-busy", () => {
@@ -234,7 +233,7 @@ const GameBoard = () => {
       toast.error(
         "Game is Busy, Already two players have joined, join/create another game instead",
       );
-       redirectToHomePage();
+      redirectToHomePage();
     });
 
     socket.on("update-rook-position", (data) => {
@@ -268,9 +267,9 @@ const GameBoard = () => {
           reason: data.gameState.reason,
         })
       );
-     toast.info("You Win, Your opponent did not move on time");
+      toast.info("You Win, Your opponent did not move on time");
       redirectToHomePage();
-      
+
     });
 
     socket.on("you-lose", (data) => {
@@ -284,8 +283,8 @@ const GameBoard = () => {
         })
       );
       toast.info("You Lose, You did not move on time !");
-        redirectToHomePage();
-     
+      redirectToHomePage();
+
     });
 
     return () => {
@@ -306,7 +305,7 @@ const GameBoard = () => {
     e.preventDefault();
     const name = formModal.inputText;
     if (name.length === 0) {
-     toast.warn(
+      toast.warn(
         "Empty name, Please enter a name before proceeding");
       return;
     }
@@ -338,40 +337,40 @@ const GameBoard = () => {
           })
         );
         toast.success(
-          "Game created successfully, Please wait for the other player to join..."  );
-          updateFormModal({
-            ...formModal,
-            show: false,
-          });
-          updateWaitingModal(true);
-      
+          "Game created successfully, Please wait for the other player to join...");
+        updateFormModal({
+          ...formModal,
+          show: false,
+        });
+        updateWaitingModal(true);
+
       })
       .catch((error) => {
         setBtnLoading(false);
-       toast.error(
+        toast.error(
           "Server Error, Please refresh the page or try again later",
         );
-         redirectToHomePage();
+        redirectToHomePage();
         console.log(error);
       });
   };
 
   return (
     <>
-    
+
       <div className="game">
-      <ToastContainer 
-       position="top-center"
-       autoClose={2000}
-       hideProgressBar={true}
-       newestOnTop={false}
-       closeOnClick
-       rtl={false}
-       pauseOnFocusLoss
-       draggable
-       pauseOnHover
-       theme="dark"
-      />
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         {waitingForOtherPlayerModal.show && (
           <Card id="waiting">
             <Card.Body>
@@ -383,24 +382,24 @@ const GameBoard = () => {
               </div>
               <div className="d-flex flex-column align-items-center justify-content-center">
                 <p className="text-center">Game Id : {gameId}</p>
-              
-              <CopyToClipboard 
-               text={`${gameId}`}
-              onCopy={() => toast.success("Game Id Copied to Clipboard")}
-              >
-                <Button >
-                  Copy
-                </Button>
-              </CopyToClipboard>
+
+                <CopyToClipboard
+                  text={`${gameId}`}
+                  onCopy={() => toast.success("Game Id Copied to Clipboard")}
+                >
+                  <Button >
+                    Copy
+                  </Button>
+                </CopyToClipboard>
               </div>
             </Card.Body>
           </Card>
         )}
         {formModal.show && (
           <Card id="create-game">
-            <Card.Body className="m-4">
+            <Card.Body className="p-4">
               <Form onSubmit={(e) => submitForm(e)}>
-              
+
                 <Form.Control
                   placeholder="Enter your name"
                   autoFocus
@@ -412,18 +411,28 @@ const GameBoard = () => {
                   }}
                 />
                 <div>
-                 <div className="d-flex align-items-center justify-content-center">
-                 <Button
-                    type="submit"
-                    variant="success"
-                    className="btn-lg mt-4 "
-                    disabled={btnLoading}
-                  >
-                    {btnLoading ? <SpinnerDotted/> : "Create Game "}
-                  </Button>
+                  <div className="d-flex align-items-center justify-content-center">
+                    {btnLoading ?
+                      <div className="mt-4 d-flex flex-column align-items-center justify-content-center">
+                        <SpinnerDotted />
+                        <p className="mt-4">
+                          Connecting to server
+                        </p>
+                      </div>
+
+                      :
+                      <Button
+                        type="submit"
+                        variant="success"
+                        className="btn-lg mt-5 "
+                        disabled={btnLoading}
+                      >
+                        "Create"
+                      </Button>
+                    }
                   </div>
-                
-                  </div>
+
+                </div>
               </Form>
             </Card.Body>
           </Card>
@@ -461,26 +470,24 @@ const GameBoard = () => {
               </div>
               <img
                 className="profileIcon"
-                src={`https://api.dicebear.com/7.x/bottts/svg?seed=${
-                  gameIdParam
-                    ? gameState.player1.playerName
-                    : gameState.player2.playerName
-                }`}
+                src={`https://api.dicebear.com/7.x/bottts/svg?seed=${gameIdParam
+                  ? gameState.player1.playerName
+                  : gameState.player2.playerName
+                  }`}
                 alt=""
               />
               <div className="text top">
-                {`${
-                  gameIdParam
-                    ? gameState.player1.playerName
-                    : gameState.player2.playerName
-                }`}{" "}
+                {`${gameIdParam
+                  ? gameState.player1.playerName
+                  : gameState.player2.playerName
+                  }`}{" "}
               </div>
               <div className="turn">
                 {gameState.playerTurn ? "" : "Opponents Turn"}
               </div>
             </div>
 
-            <GameComponent/>
+            <GameComponent />
 
             <div className="playerSection player-bottom">
               <div
@@ -513,24 +520,22 @@ const GameBoard = () => {
               </div>
               <img
                 className="profileIcon z-100"
-                src={`https://api.dicebear.com/7.x/bottts/svg?seed=${
-                  gameIdParam
-                    ? gameState.player2.playerName
-                    : gameState.player1.playerName
-                }`}
+                src={`https://api.dicebear.com/7.x/bottts/svg?seed=${gameIdParam
+                  ? gameState.player2.playerName
+                  : gameState.player1.playerName
+                  }`}
                 alt=""
               />
               <div className="text bottom">
-                {`${
-                  gameIdParam
-                    ? gameState.player2.playerName
-                    : gameState.player1.playerName
-                } (You)`}{" "}
+                {`${gameIdParam
+                  ? gameState.player2.playerName
+                  : gameState.player1.playerName
+                  } (You)`}{" "}
               </div>
               <div className="turn  ">
                 {gameState.playerTurn ? "Your Turn" : ""}
               </div>
-           </div>
+            </div>
           </div>
         )}
       </div>
