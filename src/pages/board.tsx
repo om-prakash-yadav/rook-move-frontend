@@ -148,7 +148,7 @@ const GameBoard = () => {
       }
     });
 
-    socket.on("start-game", (data) => {
+    socket.on("start-game", (data: any) => {
       console.log("start-game");
       console.log(data);
       updateWaitingModal(false);
@@ -209,7 +209,7 @@ const GameBoard = () => {
       );
     });
 
-    socket.on("game-ended", (data) => {
+    socket.on("game-ended", (data: any) => {
       console.log("game-ended");
       console.log(data);
       toast.error(
@@ -236,7 +236,7 @@ const GameBoard = () => {
       redirectToHomePage();
     });
 
-    socket.on("update-rook-position", (data) => {
+    socket.on("update-rook-position", (data: any) => {
       console.log("update-rook-position");
       console.log({
         data,
@@ -257,7 +257,7 @@ const GameBoard = () => {
       }
     });
 
-    socket.on("you-win", (data) => {
+    socket.on("you-win", (data: any) => {
       console.log("you-win");
       console.log(data);
       dispatch(
@@ -272,7 +272,7 @@ const GameBoard = () => {
 
     });
 
-    socket.on("you-lose", (data) => {
+    socket.on("you-lose", (data: any) => {
       console.log("you-lose");
       console.log(JSON.stringify(data, null, 4));
       dispatch(
@@ -399,7 +399,7 @@ const GameBoard = () => {
           <Card id="create-game">
             <Card.Body className="p-4">
               <Form onSubmit={(e) => submitForm(e)}>
-
+              <Form.Label className="fw-medium">Name</Form.Label>
                 <Form.Control
                   placeholder="Enter your name"
                   autoFocus
@@ -419,7 +419,6 @@ const GameBoard = () => {
                           Connecting to server
                         </p>
                       </div>
-
                       :
                       <Button
                         type="submit"
@@ -427,11 +426,10 @@ const GameBoard = () => {
                         className="btn-lg mt-5 "
                         disabled={btnLoading}
                       >
-                        "Create"
+                        Create
                       </Button>
                     }
                   </div>
-
                 </div>
               </Form>
             </Card.Body>

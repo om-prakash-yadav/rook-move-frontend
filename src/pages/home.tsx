@@ -68,11 +68,18 @@ const Home = () => {
         theme="dark"
       />
 
-      <Modal centered show={show} onHide={() => setShow(false)}>
+      <Modal   centered show={show} onHide={() => setShow(false)}>
         <Card id="modalCard" >
           <Form onSubmit={(e) => checkGameAndJoin(e)}>
             <Modal.Body >
-              <Form.Label className="fw-medium ">Game Code</Form.Label>
+            <Form.Label className="fw-medium ">Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <Form.Label className="fw-medium mt-3">Game Code</Form.Label>
               <Form.Control
                 type="text"
                 autoFocus
@@ -80,22 +87,18 @@ const Home = () => {
                 onChange={(e) => setGameCode(e.target.value)}
                 required
               />
-              <Form.Label className="fw-medium mt-3">Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Name"
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
+             
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShow(false)}>
-                Close
-              </Button>
-              <Button variant="success" type="submit" disabled={isBtnLoading}>
+           <div className="d-flex m-2  align-items-center justify-content-center">
+              
+           <Button className="m-2" variant="success" type="submit" disabled={isBtnLoading}>
                 {isBtnLoading ? <SpinnerInfinity /> : "Join Game"}
               </Button>
-            </Modal.Footer>
+              <Button className="m-2" variant="secondary" onClick={() => setShow(false)}>
+                Close
+              </Button>
+             
+           </div>
           </Form>
         </Card>
 
